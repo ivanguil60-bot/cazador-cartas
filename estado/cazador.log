@@ -1,0 +1,21 @@
+2026-11-10 18:16:29 OK 131 leídos, 131 nuevos, 0 evaluados, 0 avisos (primera pasada: solo se marcan como vistos)
+2026-11-10 18:16:38 OK 131 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-10 18:16:50 OK 131 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-10 18:26:41 OK 77 leídos, 28 nuevos, 28 evaluados, 0 avisos
+2026-11-10 18:30:22 OK 89 leídos, 14 nuevos, 14 evaluados, 1 avisos
+2026-11-10 18:34:42 OK 76 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-10 18:38:43 OK 77 leídos, 15 nuevos, 15 evaluados, 0 avisos
+2026-11-10 18:42:44 OK 75 leídos, 12 nuevos, 12 evaluados, 0 avisos
+2026-11-10 18:46:09 OK 75 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-10 18:49:45 OK 76 leídos, 15 nuevos, 15 evaluados, 0 avisos
+2026-11-10 18:53:45 OK 77 leídos, 17 nuevos, 17 evaluados, 1 avisos
+2026-11-10 18:57:03 ERROR panel: ModuleNotFoundError: No module named 'panel'
+2026-11-10 18:57:03 OK 76 leídos, 12 nuevos, 12 evaluados, 2 avisos
+2026-11-10 19:00:43 OK 73 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-10 19:04:45 OK 74 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-10 19:08:46 OK 76 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-10 19:12:49 OK 75 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-10 19:16:46 OK 76 leídos, 10 nuevos, 10 evaluados, 0 avisos
+2026-11-10 19:20:16 ERROR leyendo datos (1 seguidos): URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-11-10 19:57:00 OK 76 leídos, 56 nuevos, 56 evaluados, 0 avisos
+2026-11-10 20:01:01 OK 89 leídos, 16 nuevos, 16 evaluados, 0 avisos

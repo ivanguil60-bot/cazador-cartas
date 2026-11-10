@@ -1,0 +1,10 @@
+[Unit]
+Description=Cazador de cartas cada 3 minutos
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=3min
+RandomizedDelaySec=30
+
+[Install]
+WantedBy=timers.target

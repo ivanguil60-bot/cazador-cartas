@@ -1,0 +1,8 @@
+[Unit]
+Description=Cazador de gangas de cartas Pokémon (Wallapop -> ntfy)
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -I "/home/ivany/Documentos/PROYECTOS IA/NEGOCIOS ONLINE/REVENTA CARTAS/taller/cazador.py"
+TimeoutStartSec=300
