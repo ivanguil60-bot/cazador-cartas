@@ -49,6 +49,7 @@ VINTAGE = re.compile(r"\b(set base|edicion basica|base set|1999|2000|2001|primer
                      r"expedition|aquapolis|skyridge|e-?reader)\b")
 SELLADO = re.compile(r"\b(caja|cajas|etb|elite trainer|entrenador elite|booster|boosters|sobre|sobres|blister|bundle|"
                      r"display|precintad\w*|sellad\w*|lata|latas|tin|coleccion premium|premium collection)\b")
+SORPRESA = re.compile(r"\b(myst\w*|mist[ei]r\w*|caja sorpresa|sobre sorpresa|sorteo\w*|rifa\w*|ruleta|giveaway)\b")
 LOTE_FUERTE = re.compile(r"\b(lote\w*|album|carpeta|archivador|\d{1,4} cartas|cartas variadas|varias cartas)\b")
 LOTE = re.compile(r"\b(lote|coleccion|album|carpeta|archivador|caja de cartas|\d{2,4} cartas)\b")
 
@@ -88,11 +89,38 @@ def norm(s):
 
 
 # ---------- Wallapop ----------
-def buscar_wallapop(q):
+def buscar_wallapop(q, orden="newest", **extra):
     url = "https://api.wallapop.com/api/v3/search?" + urllib.parse.urlencode(
-        {"keywords": q, "order_by": "newest", "source": "search_box"})
+        {"keywords": q, "order_by": orden, "source": "search_box", **extra})
     d = get_json(url, {"X-DeviceOS": "0"})
     return d["data"]["section"]["payload"]["items"]
+
+
+def wallapop_mas_baratas(busqueda, sin_id=None, ref=None):
+    """Otras ofertas de la misma carta en Wallapop (nombre + número en el título), de más barata a más cara.
+    Devuelve {"min": €, "n": cuántas, "top": [precios]} o None. Excluye lotes, falsas, asiáticas y precios de reclamo."""
+    try:
+        # sin precio mínimo, «más baratas» devuelve solo anuncios a 0 €
+        minimo = max(CFG["precio_min_carta"], CFG["reclamo_pct"] * ref if ref else 0)  # fuera falsas y reclamos
+        items = buscar_wallapop(busqueda, "price_low_to_high", min_sale_price=round(minimo, 2))
+    except Exception:  # noqa: BLE001 - es un extra: si falla, el aviso sale igual
+        return None
+    palabras = norm(busqueda).split()
+    numero = palabras[-1] if palabras and any(ch.isdigit() for ch in palabras[-1]) else None
+    nombre = [w for w in palabras if w != numero]
+    precios = []
+    for it in items:
+        t = norm(f"{it.get('title', '')}")
+        p = precio_de(it)
+        if it.get("id") == sin_id or p < CFG["precio_min_carta"] or (it.get("reserved") or {}).get("flag"):
+            continue
+        if EXCLUIR.search(t) or SORPRESA.search(t) or LOTE_FUERTE.search(t) or ASIA.search(t) or not all(w in t for w in nombre):
+            continue
+        if numero and not re.search(rf"(?<!\d)0*{re.escape(numero.lstrip('0') or '0')}(?!\d)", t):
+            continue
+        precios.append(p)
+    precios.sort()
+    return {"min": precios[0], "n": len(precios), "top": precios[:3]} if precios else {"min": None, "n": 0, "top": []}
 
 
 # ---------- TCGdex ----------
@@ -376,6 +404,9 @@ def evaluar(it, sets):
             cm_url = "https://www.cardmarket.com/es/Pokemon/Products/Search?" + urllib.parse.urlencode(
                 {"searchString": otras_webs(c)["busqueda"]})  # nombre + número: Cardmarket va directo a la carta
             color, prio, consejo = semaforo(k, precio)
+            wp = wallapop_mas_baratas(otras_webs(c)["busqueda"], it.get("id"), ref)
+            if wp and wp["min"] and wp["min"] < precio:
+                avisos.append(f"En Wallapop hay otra más barata: {eur(wp['min'])}")
             return {"tipo": "GANGA", "prioridad": prio, "tags": ["warning"] if avisos else [],
                     "titulo": f"{color} +{eur(k['ganancia'])} ({k['margen']:.0f} %) · {eur(precio)} · {c['name']} (vale ~{eur(ref)})",
                     "cuerpo": (f"{it['title']}\n{c['name']} · {c['set']} · {c.get('rarity') or ''}\n"
@@ -383,6 +414,7 @@ def evaluar(it, sets):
                                f"Idioma: {lengua}{'' if dicho else ' (no lo dice: lo supongo)'} → vendo al {factor * 100:.0f} % de la media\n"
                                f"Cardmarket (media de todos los idiomas): ~{eur(ref)} · la más barata ahora {eur(low) if low else '?'} · venta prudente {eur(k['venta'])}\n"
                                + (f"TCGplayer (EE. UU.): desde {otras_webs(c)['tp_low']:.2f} $\n".replace(".", ",") if otras_webs(c)["tp_low"] else "") +
+                               + (f"Wallapop: otras {wp['n']}, la más barata {eur(wp['min'])}\n" if wp and wp["min"] else "") +
                                f"Ganancia estimada {eur(k['ganancia'])} · margen {k['margen']:.0f} % (sobre {eur(k['coste'])} que pagas con envío y protección)\n"
                                f"Paga como MÁXIMO {eur(k['max_anuncio'])}\n"
                                f"{consejo}\n"
@@ -391,7 +423,7 @@ def evaluar(it, sets):
                     "fila": [precio, round(k["max_anuncio"], 2), round(k["venta"], 2), round(k["ganancia"], 2),
                              f"{c['name']} ({c['set']}, {c['id']}) {como}{dudas}" + (" | " + "; ".join(avisos) if avisos else "")],
                     "enlace": enlace, "imagen": imagen, "ciudad": ciudad, "cardmarket": cm_url,
-                    "datos": {**otras_webs(c), "idioma": lengua + ("" if dicho else " (supuesto)"), "cardmarket": cm_url, "low": low, "color": color, "margen": round(k["margen"], 1), "ganancia": round(k["ganancia"], 2),
+                    "datos": {**otras_webs(c), "wpop": wp, "idioma": lengua + ("" if dicho else " (supuesto)"), "cardmarket": cm_url, "low": low, "color": color, "margen": round(k["margen"], 1), "ganancia": round(k["ganancia"], 2),
                               "coste": round(k["coste"], 2), "venta": round(k["venta"], 2), "ref": round(ref, 2),
                               "max": round(k["max_anuncio"], 2), "carta": f"{c['name']} · {c['set']}",
                               "riesgos": avisos}}

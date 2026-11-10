@@ -64,6 +64,11 @@ def seguir():
         if e is None:
             continue
         s["comprobado"] = ahora
+        if "ganancia" in a and not e["fuera"] and ahora - s.get("wpop_ts", 0) > 3600:
+            import cazador as cz
+            wp = cz.wallapop_mas_baratas(busqueda_de(a), a["id"], a.get("ref"))
+            if wp is not None:
+                s["wpop"], s["wpop_ts"] = wp, ahora
         if e["fuera"]:
             s["fuera_ts"] = ahora
         else:
@@ -318,15 +323,23 @@ document.querySelectorAll('.av').forEach(a=>a.style.display=(b.dataset.f==='todo
 """
 
 
-def precios_webs(a):
-    """Precio más bajo con cifra donde lo tenemos (Cardmarket, TCGplayer) y enlaces a las demás webs."""
-    from urllib.parse import quote_plus
+def busqueda_de(a):
     q = a.get("busqueda")
     if not q:  # avisos antiguos: nombre de la carta + número del título del anuncio
         import re
         m = re.search(r"\b([A-Za-z]{0,3}\d{1,3})\s*/\s*[A-Za-z]{0,3}\d{1,3}\b", a.get("titulo", ""))
         q = (a.get("carta") or "").split(" · ")[0] + (f" {m.group(1).lstrip('0')}" if m else "")
+    return q
+
+
+def precios_webs(a, s=None):
+    """Precio más bajo con cifra donde lo tenemos (Cardmarket, TCGplayer) y enlaces a las demás webs."""
+    from urllib.parse import quote_plus
+    q = busqueda_de(a)
     qp = quote_plus(q)
+    wp = (s or {}).get("wpop") or a.get("wpop")
+    wtxt = (f'desde {eur(wp["min"])} ({wp["n"]})' if wp and wp.get("min") else
+            ("ninguna más" if wp else "ver más baratas"))
     filas = [("Cardmarket", f'desde {eur(a["low"])}' if a.get("low") else "ver",
               f"https://www.cardmarket.com/es/Pokemon/Products/Search?searchString={qp}")]
     if a.get("tp_url"):
@@ -334,7 +347,7 @@ def precios_webs(a):
                       a["tp_url"]))
     filas += [("eBay (vendidas)", "ver precios reales", f"https://www.ebay.es/sch/i.html?_nkw={qp}+pokemon&LH_Sold=1&LH_Complete=1"),
               ("PriceCharting", "ver historial", f"https://www.pricecharting.com/search-products?type=prices&q={qp}"),
-              ("Wallapop", "ver más baratas", f"https://es.wallapop.com/app/search?keywords={qp}&order_by=price_low_to_high"),
+              ("Wallapop", wtxt, f"https://es.wallapop.com/app/search?keywords={qp}&order_by=price_low_to_high"),
               ("Vinted", "ver más baratas", f"https://www.vinted.es/catalog?search_text={qp}&order=price_low_to_high")]
     return ('<div class="webs">' + "".join(
         f'<a href="{html.escape(u)}" target="_blank" rel="noopener"><span>{n}</span><b>{html.escape(v)}</b></a>'
@@ -370,7 +383,7 @@ def tarjeta(a, s, ahora):
         gan = ""
         info = f'<div class="precios"><span>Pide <b>{precio_txt}</b></span><span>Valorar a ojo</span></div>'
     riesgos = "".join(f'<span class="chip">⚠️ {html.escape(r)}</span>' for r in a.get("riesgos") or [])
-    webs = precios_webs(a) if "ganancia" in a else ""
+    webs = precios_webs(a, s) if "ganancia" in a else ""
     cm = ""
     return (f'<div class="av" data-c="{clase}" style="--c:var(--{clase})"><div class="foto">{foto}'
             f'<span class="badge">{col} {etiqueta}</span>{gan}</div><div class="cuerpo">'
