@@ -1,0 +1,10 @@
+[Unit]
+Description=Panel de cartas: baja el estado del cazador (GitHub) y repinta PANEL CARTAS.html
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ivany/Documentos/PROYECTOS IA/NEGOCIOS ONLINE/REVENTA CARTAS/taller
+ExecStart=/usr/bin/git pull -q --ff-only
+ExecStart=/usr/bin/python3 -I "/home/ivany/Documentos/PROYECTOS IA/NEGOCIOS ONLINE/REVENTA CARTAS/taller/panel.py"
+TimeoutStartSec=120
