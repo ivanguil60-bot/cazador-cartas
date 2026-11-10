@@ -321,11 +321,14 @@ document.querySelectorAll('.av').forEach(a=>a.style.display=(b.dataset.f==='todo
 def precios_webs(a):
     """Precio más bajo con cifra donde lo tenemos (Cardmarket, TCGplayer) y enlaces a las demás webs."""
     from urllib.parse import quote_plus
-    q = a.get("busqueda") or (a.get("carta") or "").split(" · ")[0]
+    q = a.get("busqueda")
+    if not q:  # avisos antiguos: nombre de la carta + número del título del anuncio
+        import re
+        m = re.search(r"\b([A-Za-z]{0,3}\d{1,3})\s*/\s*[A-Za-z]{0,3}\d{1,3}\b", a.get("titulo", ""))
+        q = (a.get("carta") or "").split(" · ")[0] + (f" {m.group(1).lstrip('0')}" if m else "")
     qp = quote_plus(q)
-    filas = []
-    if a.get("cardmarket"):
-        filas.append(("Cardmarket", f'desde {eur(a["low"])}' if a.get("low") else "ver", a["cardmarket"]))
+    filas = [("Cardmarket", f'desde {eur(a["low"])}' if a.get("low") else "ver",
+              f"https://www.cardmarket.com/es/Pokemon/Products/Search?searchString={qp}")]
     if a.get("tp_url"):
         filas.append(("TCGplayer 🇺🇸", f'desde {a["tp_low"]:.2f} $'.replace(".", ",") if a.get("tp_low") else "ver",
                       a["tp_url"]))
@@ -368,8 +371,7 @@ def tarjeta(a, s, ahora):
         info = f'<div class="precios"><span>Pide <b>{precio_txt}</b></span><span>Valorar a ojo</span></div>'
     riesgos = "".join(f'<span class="chip">⚠️ {html.escape(r)}</span>' for r in a.get("riesgos") or [])
     webs = precios_webs(a) if "ganancia" in a else ""
-    cm = (f'<a href="{html.escape(a["cardmarket"])}" target="_blank" rel="noopener">Cardmarket</a>'
-          if a.get("cardmarket") else "")
+    cm = ""
     return (f'<div class="av" data-c="{clase}" style="--c:var(--{clase})"><div class="foto">{foto}'
             f'<span class="badge">{col} {etiqueta}</span>{gan}</div><div class="cuerpo">'
             f'<div class="t"><a href="{html.escape(a["enlace"])}" target="_blank" rel="noopener">'

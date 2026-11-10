@@ -348,7 +348,7 @@ def evaluar(it, sets):
             if tope_k["ganancia"] < CFG["ganancia_minima"]:
                 return None
             cm_url = "https://www.cardmarket.com/es/Pokemon/Products/Search?" + urllib.parse.urlencode(
-                {"searchString": f"{c['name']} {c['set']}"})
+                {"searchString": otras_webs(c)["busqueda"]})  # nombre + número: Cardmarket va directo a la carta
             return {"tipo": "SOSPECHOSA", "prioridad": 2, "tags": ["warning"],
                     "titulo": f"🔴 Sospechosa: {eur(precio)} · {c['name']} (vale ~{eur(ref)}) · ofrece hasta {eur(k['max_anuncio'])}",
                     "cuerpo": (f"{it['title']}\n{c['name']} · {c['set']} · {c.get('rarity') or ''}\n"
@@ -374,7 +374,7 @@ def evaluar(it, sets):
             if low and low <= precio * 1.1:
                 avisos.append(f"En Cardmarket hay una desde {eur(low)}: venderla cara será difícil")
             cm_url = "https://www.cardmarket.com/es/Pokemon/Products/Search?" + urllib.parse.urlencode(
-                {"searchString": f"{c['name']} {c['set']}"})
+                {"searchString": otras_webs(c)["busqueda"]})  # nombre + número: Cardmarket va directo a la carta
             color, prio, consejo = semaforo(k, precio)
             return {"tipo": "GANGA", "prioridad": prio, "tags": ["warning"] if avisos else [],
                     "titulo": f"{color} +{eur(k['ganancia'])} ({k['margen']:.0f} %) · {eur(precio)} · {c['name']} (vale ~{eur(ref)})",
