@@ -29,12 +29,27 @@ PRUEBA = "--prueba" in sys.argv
 ASIA = re.compile(r"\b(jap|japo\w*|japanese|jp|jpn|coreano\w*|korean|kor|chino|china|chinese|tailand\w*)\b")
 EXCLUIR = re.compile(r"\b(proxy|fake|falsa|falsas|replica|custom|personalizad\w*|metal\w*|gold metal|"
                      r"no oficial|imitacion|fan ?made|compro|busco|pegatina\w*|sticker\w*|tazo\w*|funda\w*|"
-                     r"album vacio|carpeta vacia|digital|codigo\w*|online)\b")
+                     r"album vacio|carpeta vacia|digital|codigo\w*|online|"
+                     r"no (?:es|son|sea|sean) (?:oficial\w*|original\w*)|no original\w*|no oficiales|replicas|"
+                     r"falsificad\w*|reproduccion\w*|fan ?art|imitaciones|no licenciad\w*)\b")
+IDIOMAS = [("inglés", re.compile(r"\b(ingles|inglesa|english|eng|en ingles)\b")),
+           ("español", re.compile(r"\b(espanol|espanola|castellano|spanish|en espanol|version espanola)\b")),
+           ("otro europeo", re.compile(r"\b(frances\w*|french|aleman\w*|german|italian\w*|portugues\w*)\b"))]
+
+
+def idioma(t):
+    """(idioma, factor de venta, ¿lo dice el anuncio?). Si no lo dice, se supone español (lo normal en Wallapop España)."""
+    vistos = [n for n, rx in IDIOMAS if rx.search(t)]
+    n = vistos[0] if len(vistos) == 1 else None  # si dice varios idiomas, ante la duda el peor
+    if len(vistos) > 1:
+        n = min(vistos, key=lambda x: CFG["idioma_factor"][x])
+    return (n or "español", CFG["idioma_factor"][n or "español"], bool(n))
 VINTAGE = re.compile(r"\b(set base|edicion basica|base set|1999|2000|2001|primera edicion|1st edition|1a edicion|"
                      r"wizards|neo genesis|jungla|jungle|fosil|fossil|team rocket|gym heroes|gym challenge|"
                      r"expedition|aquapolis|skyridge|e-?reader)\b")
 SELLADO = re.compile(r"\b(caja|cajas|etb|elite trainer|entrenador elite|booster|boosters|sobre|sobres|blister|bundle|"
                      r"display|precintad\w*|sellad\w*|lata|latas|tin|coleccion premium|premium collection)\b")
+LOTE_FUERTE = re.compile(r"\b(lote\w*|album|carpeta|archivador|\d{1,4} cartas|cartas variadas|varias cartas)\b")
 LOTE = re.compile(r"\b(lote|coleccion|album|carpeta|archivador|caja de cartas|\d{2,4} cartas)\b")
 
 
@@ -154,8 +169,8 @@ def semaforo(k, precio):
     return "🟠", 3, f"👉 Poca ganancia o margen justo: ofrece ~{eur(min(precio * 0.85, k['max_anuncio']))} y nunca más del máximo."
 
 
-def cuentas(precio, ref):
-    venta = ref * CFG["descuento_idioma_estado"]
+def cuentas(precio, ref, factor=None):
+    venta = ref * (CFG["idioma_factor"]["español"] if factor is None else factor)
     envio_venta = (CFG["coste_envio_venta_certificado"] if venta >= CFG["envio_venta_certificado_desde"]
                    else CFG["coste_envio_venta"])
     neto_venta = venta * (1 - CFG["comision_cardmarket"]) - envio_venta
@@ -299,17 +314,21 @@ def evaluar(it, sets):
 
     # 1) Carta suelta: por su número «N/M»; si no, por nombre y colección; si no, por la foto (visión local)
     tope = CFG.get("presupuesto_max_anuncio")
-    if (tope is None or precio <= tope) and not ASIA.search(t) and not SELLADO.search(t):  # cartas asiáticas: Cardmarket no da su precio
+    lengua, factor, dicho = idioma(t)
+    if (tope is None or precio <= tope) and not ASIA.search(t) and not SELLADO.search(t) and not LOTE.search(t) \
+            and precio >= CFG["precio_min_carta"]:  # cartas asiáticas: Cardmarket no da su precio
         cartas_, como = identificar(texto, sets), "por número"
         if not cartas_:
             cartas_, como = por_nombre(texto)
-        if not cartas_ and VISION and imagen and precio >= CFG.get("vision_precio_min", 15) and LOTE.search(t) is None:
+        if not cartas_ and VISION and imagen and precio >= CFG.get("vision_precio_min", 15):
             cartas_, como = VISION.reconocer(it, imgs, lambda txt: identificar(txt, sets) or por_nombre(txt)[0])
         mejor = None
         for c in cartas_:
             ref = precio_ref(c["cm"])
             if ref:
-                k = cuentas(precio, ref)
+                if precio < CFG["reclamo_pct"] * ref:  # 1 € por una de 200 €: reclamo, falsa o error
+                    continue
+                k = cuentas(precio, ref, factor)
                 if mejor is None or k["ganancia"] < mejor[1]["ganancia"]:  # ante la duda, la más prudente
                     mejor = (c, k, ref)
         if mejor and mejor[1]["ganancia"] >= CFG["ganancia_minima"] and precio <= mejor[1]["max_anuncio"]:
@@ -326,7 +345,8 @@ def evaluar(it, sets):
                     "titulo": f"{color} +{eur(k['ganancia'])} ({k['margen']:.0f} %) · {eur(precio)} · {c['name']} (vale ~{eur(ref)})",
                     "cuerpo": (f"{it['title']}\n{c['name']} · {c['set']} · {c.get('rarity') or ''}\n"
                                f"Reconocida {como}{dudas}\n"
-                               f"Cardmarket: ~{eur(ref)} · la más barata ahora {eur(low) if low else '?'} · venta prudente {eur(k['venta'])}\n"
+                               f"Idioma: {lengua}{'' if dicho else ' (no lo dice: lo supongo)'} → vendo al {factor * 100:.0f} % de la media\n"
+                               f"Cardmarket (media de todos los idiomas): ~{eur(ref)} · la más barata ahora {eur(low) if low else '?'} · venta prudente {eur(k['venta'])}\n"
                                f"Ganancia estimada {eur(k['ganancia'])} · margen {k['margen']:.0f} % (sobre {eur(k['coste'])} que pagas con envío y protección)\n"
                                f"Paga como MÁXIMO {eur(k['max_anuncio'])}\n"
                                f"{consejo}\n"
@@ -335,7 +355,7 @@ def evaluar(it, sets):
                     "fila": [precio, round(k["max_anuncio"], 2), round(k["venta"], 2), round(k["ganancia"], 2),
                              f"{c['name']} ({c['set']}, {c['id']}) {como}{dudas}" + (" | " + "; ".join(avisos) if avisos else "")],
                     "enlace": enlace, "imagen": imagen, "ciudad": ciudad, "cardmarket": cm_url,
-                    "datos": {"cardmarket": cm_url, "low": low, "color": color, "margen": round(k["margen"], 1), "ganancia": round(k["ganancia"], 2),
+                    "datos": {"idioma": lengua + ("" if dicho else " (supuesto)"), "cardmarket": cm_url, "low": low, "color": color, "margen": round(k["margen"], 1), "ganancia": round(k["ganancia"], 2),
                               "coste": round(k["coste"], 2), "venta": round(k["venta"], 2), "ref": round(ref, 2),
                               "max": round(k["max_anuncio"], 2), "carta": f"{c['name']} · {c['set']}",
                               "riesgos": avisos}}

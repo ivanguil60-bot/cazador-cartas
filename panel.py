@@ -266,6 +266,8 @@ def generar():
             der = (f'<b>{eur(a["ganancia"], True)}</b><br><span class="m">{a["margen"]:.0f} % · '
                    f'pagas máx. {eur(a["max"])}</span>')
             carta = f'{html.escape(a.get("carta", ""))} · vale ~{eur(a.get("ref", 0))}'
+            if a.get("idioma"):
+                carta += f' · {html.escape(a["idioma"])}'
             if a.get("low"):
                 carta += f' · la más barata {eur(a["low"])}'
             if a.get("cardmarket"):

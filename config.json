@@ -8,7 +8,6 @@
   "presupuesto_max_anuncio": null,
   "ganancia_minima": 8,
   "margen_seguridad": 0.3,
-  "descuento_idioma_estado": 0.85,
   "comision_cardmarket": 0.05,
   "coste_envio_venta": 1.0,
   "envio_compra": 3.0,
@@ -30,5 +29,13 @@
   },
   "envio_venta_certificado_desde": 25,
   "coste_envio_venta_certificado": 5.0,
-  "_nota_envios": "Venta en Cardmarket: carta ordinaria ~1 € si la venta < 25 €; desde 25 € envío certificado ~5 € (aproximado, sin verificar). envio_compra = lo que cobra Wallapop al comprador (aprox.)."
+  "_nota_envios": "Venta en Cardmarket: carta ordinaria ~1 € si la venta < 25 €; desde 25 € envío certificado ~5 € (aproximado, sin verificar). envio_compra = lo que cobra Wallapop al comprador (aprox.).",
+  "idioma_factor": {
+    "inglés": 0.85,
+    "español": 0.7,
+    "otro europeo": 0.6
+  },
+  "_nota_idioma": "Parte de la media de Cardmarket (todas las lenguas juntas) que se espera sacar según el idioma, ya con estado. Estimación de Claude, sin verificar: ajustar con ventas reales.",
+  "precio_min_carta": 3,
+  "reclamo_pct": 0.15
 }
