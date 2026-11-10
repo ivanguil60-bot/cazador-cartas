@@ -127,7 +127,8 @@ def carta(id_):
         d = None
     if d:
         d = {"id": d["id"], "name": d["name"], "set": d["set"]["name"], "rarity": d.get("rarity"),
-             "cm": (d.get("pricing") or {}).get("cardmarket")}
+             "cm": (d.get("pricing") or {}).get("cardmarket"), "tp": (d.get("pricing") or {}).get("tcgplayer"),
+             "num": d.get("localId")}
     CACHE[id_] = {"ts": time.time(), "d": d}
     return d
 
@@ -294,6 +295,17 @@ def historial(it, precio, r):
     guardar(HIST_F, h)
 
 
+def otras_webs(c):
+    """Precio más bajo en TCGplayer (USD, de TCGdex) y texto de búsqueda para el resto de webs."""
+    tp = c.get("tp") or {}
+    lows = [(v.get("lowPrice"), v.get("marketPrice"), v.get("productId")) for k, v in tp.items()
+            if isinstance(v, dict) and v.get("lowPrice")]
+    low, market, pid = min(lows) if lows else (None, None, None)
+    return {"tp_low": low, "tp_market": market,
+            "tp_url": f"https://www.tcgplayer.com/product/{pid}" if pid else None,
+            "busqueda": f"{c['name']} {c.get('num') or c['id'].rsplit('-', 1)[-1]}"}
+
+
 def eur(x):
     return f"{x:,.2f} €".replace(",", "X").replace(".", ",").replace("X", ".")
 
@@ -352,7 +364,8 @@ def evaluar(it, sets):
                               "ganancia": round(tope_k["ganancia"], 2), "margen": round(tope_k["margen"], 1),
                               "coste": round(tope_k["coste"], 2), "venta": round(k["venta"], 2), "ref": round(ref, 2),
                               "max": round(k["max_anuncio"], 2), "carta": f"{c['name']} · {c['set']}",
-                              "low": (c.get("cm") or {}).get("low"), "riesgos": ["Precio irreal: pregunta el precio de verdad"]}}
+                              "low": (c.get("cm") or {}).get("low"), "riesgos": ["Precio irreal: pregunta el precio de verdad"],
+                              **otras_webs(c)}}
         if mejor and mejor[1]["ganancia"] >= CFG["ganancia_minima"] and precio <= mejor[1]["max_anuncio"]:
             c, k, ref = mejor
             dudas = "" if len(cartas_) == 1 else f" (la más barata de {len(cartas_)} posibles)"
@@ -369,6 +382,7 @@ def evaluar(it, sets):
                                f"Reconocida {como}{dudas}\n"
                                f"Idioma: {lengua}{'' if dicho else ' (no lo dice: lo supongo)'} → vendo al {factor * 100:.0f} % de la media\n"
                                f"Cardmarket (media de todos los idiomas): ~{eur(ref)} · la más barata ahora {eur(low) if low else '?'} · venta prudente {eur(k['venta'])}\n"
+                               + (f"TCGplayer (EE. UU.): desde {otras_webs(c)['tp_low']:.2f} $\n".replace(".", ",") if otras_webs(c)["tp_low"] else "") +
                                f"Ganancia estimada {eur(k['ganancia'])} · margen {k['margen']:.0f} % (sobre {eur(k['coste'])} que pagas con envío y protección)\n"
                                f"Paga como MÁXIMO {eur(k['max_anuncio'])}\n"
                                f"{consejo}\n"
@@ -377,7 +391,7 @@ def evaluar(it, sets):
                     "fila": [precio, round(k["max_anuncio"], 2), round(k["venta"], 2), round(k["ganancia"], 2),
                              f"{c['name']} ({c['set']}, {c['id']}) {como}{dudas}" + (" | " + "; ".join(avisos) if avisos else "")],
                     "enlace": enlace, "imagen": imagen, "ciudad": ciudad, "cardmarket": cm_url,
-                    "datos": {"idioma": lengua + ("" if dicho else " (supuesto)"), "cardmarket": cm_url, "low": low, "color": color, "margen": round(k["margen"], 1), "ganancia": round(k["ganancia"], 2),
+                    "datos": {**otras_webs(c), "idioma": lengua + ("" if dicho else " (supuesto)"), "cardmarket": cm_url, "low": low, "color": color, "margen": round(k["margen"], 1), "ganancia": round(k["ganancia"], 2),
                               "coste": round(k["coste"], 2), "venta": round(k["venta"], 2), "ref": round(ref, 2),
                               "max": round(k["max_anuncio"], 2), "carta": f"{c['name']} · {c['set']}",
                               "riesgos": avisos}}

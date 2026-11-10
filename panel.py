@@ -303,6 +303,10 @@ font-size:20px;padding:4px 10px;border-radius:10px}
 .botones{display:flex;gap:8px;margin-top:auto;padding-top:6px}
 .botones a{flex:1;text-align:center;font-size:13px;padding:7px;border-radius:10px;border:1px solid var(--linea);
 color:var(--texto);text-decoration:none}.botones a.p1{background:var(--c);color:#fff;border-color:var(--c)}
+.webs{display:grid;grid-template-columns:1fr;gap:4px;margin:4px 0}
+.webs a{display:flex;justify-content:space-between;gap:6px;font-size:12px;padding:5px 8px;border-radius:8px;
+background:var(--fondo);color:var(--texto);text-decoration:none;border:1px solid var(--linea)}
+.webs a:hover{border-color:var(--azul)}.webs b{white-space:nowrap}
 .nota{color:var(--suave);font-size:13px;margin-top:22px}.vacio{color:var(--suave);padding:20px;text-align:center}
 @media (max-width:760px){.fila{grid-template-columns:1fr}.ef{grid-template-columns:120px 1fr 40px}}
 """
@@ -312,6 +316,26 @@ document.querySelectorAll('.filtros button').forEach(b=>b.onclick=()=>{
 document.querySelectorAll('.filtros button').forEach(x=>x.classList.toggle('on',x===b));
 document.querySelectorAll('.av').forEach(a=>a.style.display=(b.dataset.f==='todo'||a.dataset.c===b.dataset.f)?'':'none');});
 """
+
+
+def precios_webs(a):
+    """Precio más bajo con cifra donde lo tenemos (Cardmarket, TCGplayer) y enlaces a las demás webs."""
+    from urllib.parse import quote_plus
+    q = a.get("busqueda") or (a.get("carta") or "").split(" · ")[0]
+    qp = quote_plus(q)
+    filas = []
+    if a.get("cardmarket"):
+        filas.append(("Cardmarket", f'desde {eur(a["low"])}' if a.get("low") else "ver", a["cardmarket"]))
+    if a.get("tp_url"):
+        filas.append(("TCGplayer 🇺🇸", f'desde {a["tp_low"]:.2f} $'.replace(".", ",") if a.get("tp_low") else "ver",
+                      a["tp_url"]))
+    filas += [("eBay (vendidas)", "ver precios reales", f"https://www.ebay.es/sch/i.html?_nkw={qp}+pokemon&LH_Sold=1&LH_Complete=1"),
+              ("PriceCharting", "ver historial", f"https://www.pricecharting.com/search-products?type=prices&q={qp}"),
+              ("Wallapop", "ver más baratas", f"https://es.wallapop.com/app/search?keywords={qp}&order_by=price_low_to_high"),
+              ("Vinted", "ver más baratas", f"https://www.vinted.es/catalog?search_text={qp}&order=price_low_to_high")]
+    return ('<div class="webs">' + "".join(
+        f'<a href="{html.escape(u)}" target="_blank" rel="noopener"><span>{n}</span><b>{html.escape(v)}</b></a>'
+        for n, v, u in filas) + "</div>")
 
 
 def tarjeta(a, s, ahora):
@@ -343,6 +367,7 @@ def tarjeta(a, s, ahora):
         gan = ""
         info = f'<div class="precios"><span>Pide <b>{precio_txt}</b></span><span>Valorar a ojo</span></div>'
     riesgos = "".join(f'<span class="chip">⚠️ {html.escape(r)}</span>' for r in a.get("riesgos") or [])
+    webs = precios_webs(a) if "ganancia" in a else ""
     cm = (f'<a href="{html.escape(a["cardmarket"])}" target="_blank" rel="noopener">Cardmarket</a>'
           if a.get("cardmarket") else "")
     return (f'<div class="av" data-c="{clase}" style="--c:var(--{clase})"><div class="foto">{foto}'
@@ -350,7 +375,7 @@ def tarjeta(a, s, ahora):
             f'<div class="t"><a href="{html.escape(a["enlace"])}" target="_blank" rel="noopener">'
             f'{html.escape(a["titulo"][:80])}</a></div>'
             f'<div class="m">{datetime.fromtimestamp(a["ts"]):%d/%m %H:%M} · {html.escape(a.get("ciudad", ""))}</div>'
-            f'{info}<div>{est}{riesgos}</div><div class="botones">'
+            f'{info}{webs}<div>{est}{riesgos}</div><div class="botones">'
             f'<a class="p1" href="{html.escape(a["enlace"])}" target="_blank" rel="noopener">Wallapop</a>{cm}</div></div></div>')
 
 
