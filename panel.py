@@ -17,7 +17,7 @@ INICIO, FIN = date(2026, 11, 10), date(2027, 1, 5)
 PRESUPUESTO, OBJ_HORA = 300, 8
 DIAS_SEGUIR = 7
 COLORES = {"🟢🔥": ("verde", "Cómprala ya"), "🟡": ("amarillo", "Compra rápido"),
-           "🟠": ("naranja", "Ganancia justa"), "🔎": ("lote", "Lote a ojo")}
+           "🟠": ("naranja", "Ganancia justa"), "🔴": ("rojo", "Sospechosa (tope a ofrecer)"), "🔎": ("lote", "Lote a ojo")}
 
 
 def leer(f, defecto):
@@ -219,7 +219,7 @@ def generar():
     hist, seg, real = leer(HIST_F, []), leer(SEG_F, {}), apuntes()
     ahora = time.time()
     hoy = date.today()
-    gangas = [a for a in hist if "ganancia" in a]
+    gangas = [a for a in hist if "ganancia" in a and a.get("color") != "🔴"]
     vy = [a for a in gangas if a.get("color") in ("🟢🔥", "🟡")]
     hoy_n = sum(1 for a in hist if datetime.fromtimestamp(a["ts"]).date() == hoy)
     cuenta = {c: sum(1 for a in hist if a.get("color") == c) for c in COLORES}

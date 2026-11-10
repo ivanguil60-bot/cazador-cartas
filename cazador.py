@@ -315,8 +315,7 @@ def evaluar(it, sets):
     # 1) Carta suelta: por su número «N/M»; si no, por nombre y colección; si no, por la foto (visión local)
     tope = CFG.get("presupuesto_max_anuncio")
     lengua, factor, dicho = idioma(t)
-    if (tope is None or precio <= tope) and not ASIA.search(t) and not SELLADO.search(t) and not LOTE.search(t) \
-            and precio >= CFG["precio_min_carta"]:  # cartas asiáticas: Cardmarket no da su precio
+    if (tope is None or precio <= tope) and not ASIA.search(t) and not SELLADO.search(t) and not LOTE_FUERTE.search(t):  # cartas asiáticas: Cardmarket no da su precio
         cartas_, como = identificar(texto, sets), "por número"
         if not cartas_:
             cartas_, como = por_nombre(texto)
@@ -326,11 +325,34 @@ def evaluar(it, sets):
         for c in cartas_:
             ref = precio_ref(c["cm"])
             if ref:
-                if precio < CFG["reclamo_pct"] * ref:  # 1 € por una de 200 €: reclamo, falsa o error
-                    continue
                 k = cuentas(precio, ref, factor)
+                # 1 € por una de 200 €: reclamo, falsa o error -> aviso 🔴 aparte con el tope a ofrecer
+                k["sospechosa"] = precio < CFG["precio_min_carta"] or precio < CFG["reclamo_pct"] * ref
                 if mejor is None or k["ganancia"] < mejor[1]["ganancia"]:  # ante la duda, la más prudente
                     mejor = (c, k, ref)
+        if mejor and mejor[1]["sospechosa"]:
+            c, k, ref = mejor
+            tope_k = cuentas(k["max_anuncio"], ref, factor)
+            if tope_k["ganancia"] < CFG["ganancia_minima"]:
+                return None
+            cm_url = "https://www.cardmarket.com/es/Pokemon/Products/Search?" + urllib.parse.urlencode(
+                {"searchString": f"{c['name']} {c['set']}"})
+            return {"tipo": "SOSPECHOSA", "prioridad": 2, "tags": ["warning"],
+                    "titulo": f"🔴 Sospechosa: {eur(precio)} · {c['name']} (vale ~{eur(ref)}) · ofrece hasta {eur(k['max_anuncio'])}",
+                    "cuerpo": (f"{it['title']}\n{c['name']} · {c['set']} · {c.get('rarity') or ''}\n"
+                               f"Precio irreal para lo que vale: suele ser reclamo («pon 1 € y hablamos»), falsa o error.\n"
+                               f"Idioma: {lengua}{'' if dicho else ' (no lo dice: lo supongo)'} → vendo al {factor * 100:.0f} % de la media\n"
+                               f"👉 Pregunta el precio real. TOPE a proponer: {eur(k['max_anuncio'])} "
+                               f"(pagando eso ganarías ~{eur(tope_k['ganancia'])}). Más barato, mejor.\n"
+                               f"{ciudad} · Pide fotos delante y detrás antes de pagar."),
+                    "fila": [precio, round(k["max_anuncio"], 2), round(k["venta"], 2), round(tope_k["ganancia"], 2),
+                             f"{c['name']} ({c['set']}, {c['id']}) SOSPECHOSA"],
+                    "enlace": enlace, "imagen": imagen, "ciudad": ciudad, "cardmarket": cm_url,
+                    "datos": {"color": "🔴", "idioma": lengua + ("" if dicho else " (supuesto)"), "cardmarket": cm_url,
+                              "ganancia": round(tope_k["ganancia"], 2), "margen": round(tope_k["margen"], 1),
+                              "coste": round(tope_k["coste"], 2), "venta": round(k["venta"], 2), "ref": round(ref, 2),
+                              "max": round(k["max_anuncio"], 2), "carta": f"{c['name']} · {c['set']}",
+                              "low": (c.get("cm") or {}).get("low"), "riesgos": ["Precio irreal: pregunta el precio de verdad"]}}
         if mejor and mejor[1]["ganancia"] >= CFG["ganancia_minima"] and precio <= mejor[1]["max_anuncio"]:
             c, k, ref = mejor
             dudas = "" if len(cartas_) == 1 else f" (la más barata de {len(cartas_)} posibles)"

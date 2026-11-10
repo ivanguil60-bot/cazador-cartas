@@ -37,5 +37,6 @@
   },
   "_nota_idioma": "Parte de la media de Cardmarket (todas las lenguas juntas) que se espera sacar según el idioma, ya con estado. Estimación de Claude, sin verificar: ajustar con ventas reales.",
   "precio_min_carta": 3,
-  "reclamo_pct": 0.15
+  "reclamo_pct": 0.15,
+  "_nota_sospechosa": "Precio < precio_min_carta € o < reclamo_pct de la referencia: aviso 🔴 (prioridad 2) con el tope a ofrecer, en vez de ganga."
 }
