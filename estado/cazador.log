@@ -487,3 +487,27 @@
 2026-11-11 18:56:16 OK 106 leídos, 18 nuevos, 18 evaluados, 0 avisos
 2026-11-11 18:59:13 OK 106 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-11 19:02:15 OK 105 leídos, 19 nuevos, 19 evaluados, 0 avisos
+2026-11-11 19:05:26 OK 101 leídos, 26 nuevos, 26 evaluados, 0 avisos
+2026-11-11 19:08:22 OK 101 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 19:11:24 OK 98 leídos, 16 nuevos, 16 evaluados, 1 avisos
+2026-11-11 19:14:23 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 19:17:24 OK 98 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-11 19:20:09 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:20:25 OK 97 leídos, 15 nuevos, 14 evaluados, 0 avisos
+2026-11-11 19:23:08 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:23:24 OK 96 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-11 19:26:09 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:26:25 OK 99 leídos, 16 nuevos, 15 evaluados, 0 avisos
+2026-11-11 19:29:07 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:29:23 OK 99 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-11 19:32:08 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:32:24 OK 101 leídos, 18 nuevos, 17 evaluados, 0 avisos
+2026-11-11 19:35:09 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:35:25 OK 101 leídos, 19 nuevos, 18 evaluados, 1 avisos
+2026-11-11 19:38:07 ERROR evaluando nz08n0o4ee6o: TypeError: bad operand type for unary +: 'str'
+2026-11-11 19:38:23 OK 101 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-11 19:41:25 OK 101 leídos, 24 nuevos, 24 evaluados, 1 avisos
+2026-11-11 19:44:26 OK 101 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 19:47:24 OK 105 leídos, 17 nuevos, 17 evaluados, 0 avisos
+2026-11-11 19:50:24 OK 105 leídos, 20 nuevos, 20 evaluados, 0 avisos
+2026-11-11 19:53:24 OK 105 leídos, 0 nuevos, 0 evaluados, 0 avisos
