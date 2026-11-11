@@ -198,8 +198,12 @@ def semaforo(k, precio):
     return "🟠", 3, f"👉 Poca ganancia o margen justo: ofrece ~{eur(min(precio * 0.85, k['max_anuncio']))} y nunca más del máximo."
 
 
-def cuentas(precio, ref, factor=None):
+def cuentas(precio, ref, factor=None, low=None):
+    """low = precio más bajo ahora en Cardmarket: para vender rápido hay que ponerse justo por debajo,
+    así que la venta nunca se cuenta por encima de eso (11-nov-2026)."""
     venta = ref * (CFG["idioma_factor"]["español"] if factor is None else factor)
+    if low and low > 0:
+        venta = min(venta, low * (1 - CFG.get("rebaja_bajo_minimo", 0.03)))
     envio_venta = (CFG["coste_envio_venta_certificado"] if venta >= CFG["envio_venta_certificado_desde"]
                    else CFG["coste_envio_venta"])
     neto_venta = venta * (1 - CFG["comision_cardmarket"]) - envio_venta
@@ -365,20 +369,20 @@ def evaluar(it, sets):
         for c in cartas_:
             ref = precio_ref(c["cm"])
             if ref:
-                k = cuentas(precio, ref, factor)
+                k = cuentas(precio, ref, factor, (c.get("cm") or {}).get("low"))
                 # 1 € por una de 200 €: reclamo, falsa o error -> aviso 🔴 aparte con el tope a ofrecer
                 k["sospechosa"] = precio < CFG["precio_min_carta"] or precio < CFG["reclamo_pct"] * ref
                 if mejor is None or k["ganancia"] < mejor[1]["ganancia"]:  # ante la duda, la más prudente
                     mejor = (c, k, ref)
         if mejor and mejor[1]["sospechosa"]:
             c, k, ref = mejor
-            tope_k = cuentas(k["max_anuncio"], ref, factor)
+            tope_k = cuentas(k["max_anuncio"], ref, factor, (c.get("cm") or {}).get("low"))
             if tope_k["ganancia"] < CFG["ganancia_minima"]:
                 return None
             cm_url = "https://www.cardmarket.com/es/Pokemon/Products/Search?" + urllib.parse.urlencode(
                 {"searchString": otras_webs(c)["busqueda"]})  # nombre + número: Cardmarket va directo a la carta
             return {"tipo": "SOSPECHOSA", "prioridad": 2, "tags": ["warning"],
-                    "titulo": f"🔴 Sospechosa: {eur(precio)} · {c['name']} (vale ~{eur(ref)}) · ofrece hasta {eur(k['max_anuncio'])}",
+                    "titulo": f"🔴 Sospechosa: {eur(precio)} · {c['name']} (venta ~{eur(k['venta'])}) · ofrece hasta {eur(k['max_anuncio'])}",
                     "cuerpo": (f"{it['title']}\n{c['name']} · {c['set']} · {c.get('rarity') or ''}\n"
                                f"Precio irreal para lo que vale: suele ser reclamo («pon 1 € y hablamos»), falsa o error.\n"
                                f"Idioma: {lengua}{'' if dicho else ' (no lo dice: lo supongo)'} → vendo al {factor * 100:.0f} % de la media\n"
@@ -394,7 +398,10 @@ def evaluar(it, sets):
                               "max": round(k["max_anuncio"], 2), "carta": f"{c['name']} · {c['set']}",
                               "low": (c.get("cm") or {}).get("low"), "riesgos": ["Precio irreal: pregunta el precio de verdad"],
                               **otras_webs(c)}}
-        if mejor and mejor[1]["ganancia"] >= CFG["ganancia_minima"] and precio <= mejor[1]["max_anuncio"]:
+        # Un poco por encima del máximo: no se compra al precio que pide, pero merece una OFERTA al máximo (11-nov-2026)
+        oferta = bool(mejor) and mejor[1]["max_anuncio"] < precio <= mejor[1]["max_anuncio"] * CFG.get("oferta_hasta", 1.3) \
+            and cuentas(mejor[1]["max_anuncio"], mejor[2], factor, (mejor[0].get("cm") or {}).get("low"))["ganancia"] >= CFG["ganancia_minima"]
+        if mejor and (oferta or (mejor[1]["ganancia"] >= CFG["ganancia_minima"] and precio <= mejor[1]["max_anuncio"])):
             c, k, ref = mejor
             dudas = "" if len(cartas_) == 1 else f" (la más barata de {len(cartas_)} posibles)"
             avisos = riesgos(it, precio, ref, imgs)
@@ -404,15 +411,22 @@ def evaluar(it, sets):
             cm_url = "https://www.cardmarket.com/es/Pokemon/Products/Search?" + urllib.parse.urlencode(
                 {"searchString": otras_webs(c)["busqueda"]})  # nombre + número: Cardmarket va directo a la carta
             color, prio, consejo = semaforo(k, precio)
+            if oferta:
+                kt = cuentas(k["max_anuncio"], ref, factor, low)
+                color, prio = "🟠", 3
+                consejo = (f"👉 Al precio que pide NO compensa. Haz una OFERTA de {eur(k['max_anuncio'])} como máximo "
+                           f"(ganarías ~{eur(kt['ganancia'])}). Si no acepta, déjala pasar.")
             wp = wallapop_mas_baratas(otras_webs(c)["busqueda"], it.get("id"), ref)
             if wp and wp["min"] and wp["min"] < precio:
                 avisos.append(f"En Wallapop hay otra más barata: {eur(wp['min'])}")
             return {"tipo": "GANGA", "prioridad": prio, "tags": ["warning"] if avisos else [],
-                    "titulo": f"{color} +{eur(k['ganancia'])} ({k['margen']:.0f} %) · {eur(precio)} · {c['name']} (vale ~{eur(ref)})",
+                    "titulo": (f"🟠 Ofrece {eur(k['max_anuncio'])} (pide {eur(precio)}) · {c['name']} (venta ~{eur(k['venta'])})" if oferta else
+                               f"{color} +{eur(k['ganancia'])} ({k['margen']:.0f} %) · {eur(precio)} · {c['name']} (venta ~{eur(k['venta'])})"),
                     "cuerpo": (f"{it['title']}\n{c['name']} · {c['set']} · {c.get('rarity') or ''}\n"
                                f"Reconocida {como}{dudas}\n"
                                f"Idioma: {lengua}{'' if dicho else ' (no lo dice: lo supongo)'} → vendo al {factor * 100:.0f} % de la media\n"
-                               f"Cardmarket (media de todos los idiomas): ~{eur(ref)} · la más barata ahora {eur(low) if low else '?'} · venta prudente {eur(k['venta'])}\n"
+                               f"Cardmarket (media de todos los idiomas): ~{eur(ref)} · la más barata ahora {eur(low) if low else '?'}\n"
+                               f"Cuenta hecha vendiendo a {eur(k['venta'])}" + (" (justo por debajo de la más barata de Cardmarket)\n" if low and k['venta'] < ref * factor else " (media según idioma)\n")
                                + (f"TCGplayer (EE. UU.): desde {otras_webs(c)['tp_low']:.2f} $\n".replace(".", ",") if otras_webs(c)["tp_low"] else "") +
                                + (f"Wallapop: otras {wp['n']}, la más barata {eur(wp['min'])}\n" if wp and wp["min"] else "") +
                                f"Ganancia estimada {eur(k['ganancia'])} · margen {k['margen']:.0f} % (sobre {eur(k['coste'])} que pagas con envío y protección)\n"

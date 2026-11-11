@@ -18,7 +18,7 @@ INICIO, FIN = date(2026, 11, 10), date(2027, 1, 5)
 PRESUPUESTO, OBJ_HORA = 300, 8
 DIAS_SEGUIR = 7
 COLORES = {"🟢🔥": ("verde", "Cómprala ya"), "🟡": ("amarillo", "Compra rápido"),
-           "🟠": ("naranja", "Ganancia justa"), "🔴": ("rojo", "Sospechosa (tope a ofrecer)"), "🔎": ("lote", "Lote a ojo")}
+           "🟠": ("naranja", "Haz oferta / justa"), "🔴": ("rojo", "Sospechosa (tope a ofrecer)"), "🔎": ("lote", "Lote a ojo")}
 
 
 def leer(f, defecto):

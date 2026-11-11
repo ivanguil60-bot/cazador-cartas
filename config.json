@@ -6,7 +6,7 @@
     "lote cartas pokemon"
   ],
   "presupuesto_max_anuncio": null,
-  "ganancia_minima": 8,
+  "ganancia_minima": 15,
   "margen_seguridad": 0.3,
   "comision_cardmarket": 0.05,
   "coste_envio_venta": 1.0,
@@ -38,5 +38,9 @@
   "_nota_idioma": "Parte de la media de Cardmarket (todas las lenguas juntas) que se espera sacar según el idioma, ya con estado. Estimación de Claude, sin verificar: ajustar con ventas reales.",
   "precio_min_carta": 3,
   "reclamo_pct": 0.15,
-  "_nota_sospechosa": "Precio < precio_min_carta € o < reclamo_pct de la referencia: aviso 🔴 (prioridad 2) con el tope a ofrecer, en vez de ganga."
+  "_nota_sospechosa": "Precio < precio_min_carta € o < reclamo_pct de la referencia: aviso 🔴 (prioridad 2) con el tope a ofrecer, en vez de ganga.",
+  "rebaja_bajo_minimo": 0.03,
+  "_nota_venta": "11-nov-2026: la venta se cuenta como mucho al precio más bajo de Cardmarket menos rebaja_bajo_minimo (para vender rápido). ganancia_minima subida de 8 a 15 €.",
+  "oferta_hasta": 1.3,
+  "_nota_oferta": "Si el anuncio pide hasta un 30 % más del máximo a pagar, llega aviso 🟠 «Ofrece X»: no comprar al precio publicado, hacer oferta al máximo."
 }
