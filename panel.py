@@ -126,7 +126,29 @@ def dur(seg):
     return f"{m / 1440:.1f} días".replace(".", ",")
 
 
-def grafica(hist, real):
+def flujo_de(a, s):
+    """Compra → venta → profit de un aviso con cifra. Prudente = vender al precio más bajo que hay ahora en
+    Cardmarket («desde»); optimista = la media de Cardmarket por idioma (lo que usa el aviso)."""
+    import cazador as cz
+    cfg = cz.CFG
+    p = s.get("precio") if s.get("precio") is not None else a["precio"]
+    factor = cz.idioma(cz.norm(a["titulo"]))[1]
+    opt = cz.cuentas(p, a["ref"], factor)
+    coste = opt["coste"]
+    low = a.get("low")
+    if low:
+        env = cfg["coste_envio_venta_certificado"] if low >= cfg["envio_venta_certificado_desde"] else cfg["coste_envio_venta"]
+        neto = low * (1 - cfg["comision_cardmarket"]) - env
+        gan = neto - coste
+    else:  # sin precio «desde»: la media con un 30 % menos
+        neto = opt["venta"] * 0.7 * (1 - cfg["comision_cardmarket"])
+        gan = neto - coste
+    wp = (s.get("wpop") or {}).get("min")
+    return {"pide": p, "pide0": a["precio"], "coste": coste, "low": low, "neto": neto, "gan": gan,
+            "gan_opt": opt["ganancia"], "wp": wp, "gan_wp": (wp - coste) if wp else None}
+
+
+def grafica(hist, real, seg=None):
     """Ganancia posible acumulada por día (🟢+🟡 y todas) frente a beneficio real."""
     dias = [(INICIO.toordinal() + i) for i in range((min(date.today(), FIN) - INICIO).days + 1)]
     if len(dias) < 2:
@@ -135,10 +157,12 @@ def grafica(hist, real):
     for a in hist:
         if "ganancia" not in a or a.get("color") == "🔴":
             continue
+        if a.get("color") not in ("🟢🔥", "🟡"):
+            continue
         d = datetime.fromtimestamp(a["ts"]).date().toordinal()
-        por_dia_t[d] = por_dia_t.get(d, 0) + a["ganancia"]
-        if a.get("color") in ("🟢🔥", "🟡"):
-            por_dia_vy[d] = por_dia_vy.get(d, 0) + a["ganancia"]
+        fl = flujo_de(a, (seg or {}).get(a["id"], {}))
+        por_dia_t[d] = por_dia_t.get(d, 0) + fl["gan_opt"]
+        por_dia_vy[d] = por_dia_vy.get(d, 0) + max(0, fl["gan"])
     for f in real["filas"]:
         try:
             d = datetime.strptime(f["fecha"].strip()[:10], "%d/%m/%Y").date().toordinal()
@@ -152,8 +176,8 @@ def grafica(hist, real):
             t += m.get(d, 0)
             out.append(t)
         return out
-    series = [("Todas las gangas", acum(por_dia_t), "var(--naranja)"),
-              ("Solo 🟢 y 🟡", acum(por_dia_vy), "var(--verde)"),
+    series = [("Optimista 🟢+🟡", acum(por_dia_t), "var(--naranja)"),
+              ("Realista 🟢+🟡", acum(por_dia_vy), "var(--verde)"),
               ("Tu beneficio real", acum(por_dia_r), "var(--azul)")]
     W, H, P = 640, 220, 58
     tope = max([1] + [max(s[1]) for s in series])
@@ -312,6 +336,28 @@ color:var(--texto);text-decoration:none}.botones a.p1{background:var(--c);color:
 .webs a{display:flex;justify-content:space-between;gap:6px;font-size:12px;padding:5px 8px;border-radius:8px;
 background:var(--fondo);color:var(--texto);text-decoration:none;border:1px solid var(--linea)}
 .webs a:hover{border-color:var(--azul)}.webs b{white-space:nowrap}
+.flujo{display:flex;flex-direction:column;gap:10px}
+.ff{background:var(--tarjeta);border:1px solid var(--linea);border-left:6px solid var(--c,var(--texto));border-radius:16px;
+padding:12px 14px;display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:8px 16px;align-items:center}
+.ff.total{background:var(--texto);color:var(--fondo);border-color:var(--texto)}
+.ff.total .fcarta span,.ff.total .paso span,.ff.total .paso small{color:inherit;opacity:.75}
+.ff.total .paso{background:rgba(127,127,127,.18)}
+.fcarta{display:flex;gap:10px;align-items:center;color:inherit;text-decoration:none;min-width:0}
+.fcarta img,.fcarta>i{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none;background:var(--linea)}
+.fcarta div{display:flex;flex-direction:column;min-width:0}.fcarta span{color:var(--suave);font-size:12px}
+.fcarta b{font-size:14px}
+.tubo{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;align-items:stretch}
+.fl{display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--suave)}
+.paso{background:var(--fondo);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;min-width:0}
+.paso small{color:var(--suave);font-size:12px}.paso b{font-size:21px;white-space:nowrap}
+.paso span{color:var(--suave);font-size:11.5px;line-height:1.3}
+.paso.compra b{color:var(--rojo)}.paso.venta b{color:var(--azul)}
+.paso.profit.pos{background:color-mix(in srgb,var(--verde) 16%,transparent)}.paso.profit.pos b{color:var(--verde)}
+.paso.profit.neg{background:color-mix(in srgb,var(--rojo) 14%,transparent)}.paso.profit.neg b{color:var(--rojo)}
+.ff.total .paso b{color:inherit}
+.fwp{grid-column:2;font-size:12.5px;color:var(--suave)}.fwp .pos{color:var(--verde)}.fwp .neg{color:var(--rojo)}
+@media (max-width:760px){.ff{grid-template-columns:1fr}.fwp{grid-column:1}.tubo{grid-template-columns:1fr 16px 1fr 16px 1fr}
+.paso b{font-size:16px}.paso span{display:none}}
 .nota{color:var(--suave);font-size:13px;margin-top:22px}.vacio{color:var(--suave);padding:20px;text-align:center}
 @media (max-width:760px){.fila{grid-template-columns:1fr}.ef{grid-template-columns:120px 1fr 40px}}
 """
@@ -394,6 +440,58 @@ def tarjeta(a, s, ahora):
             f'<a class="p1" href="{html.escape(a["enlace"])}" target="_blank" rel="noopener">Wallapop</a>{cm}</div></div></div>')
 
 
+def paso(clase, titulo, cifra, pie):
+    return (f'<div class="paso {clase}"><small>{titulo}</small><b>{cifra}</b>'
+            f'<span>{pie}</span></div>')
+
+
+def flujo_html(avisos, seg, ahora):
+    filas, tc, tv, tg, to = [], 0, 0, 0, 0
+    for a in avisos:
+        s = seg.get(a["id"], {})
+        fl = flujo_de(a, s)
+        col = a.get("color", "")
+        clase = COLORES.get(col, ("lote",))[0]
+        cuenta = col in ("🟢🔥", "🟡")
+        if cuenta:
+            tc, tv, tg, to = tc + fl["coste"], tv + fl["neto"], tg + fl["gan"], to + fl["gan_opt"]
+        pide = eur(fl["pide"]) if abs(fl["pide"] - fl["pide0"]) < 0.01 else f'<s>{eur(fl["pide0"])}</s> {eur(fl["pide"])}'
+        if s.get("fuera_ts"):
+            est = f'<span class="chip fuera">⛔ Se fue en {dur(s["fuera_ts"] - a["ts"])}</span>'
+        elif s.get("comprobado") and ahora - a["ts"] <= DIAS_SEGUIR * 86400:
+            est = '<span class="chip activo">● A la venta</span>'
+        else:
+            est = ""
+        foto = (f'<img src="{html.escape(a["imagen"])}" alt="" referrerpolicy="no-referrer">' if a.get("imagen") else "<i></i>")
+        venta_pie = (f'Cardmarket desde {eur(fl["low"])}, −5 % y envío' if fl["low"] else "media −30 %, −5 %")
+        wp = ""
+        if fl["wp"]:
+            wp = (f'<div class="fwp">Si la revendes en <b>Wallapop</b>: la más barata allí está a {eur(fl["wp"])} → '
+                  f'<b class="{"pos" if fl["gan_wp"] >= 0 else "neg"}">{eur(fl["gan_wp"], True)}</b></div>')
+        filas.append(
+            f'<div class="ff" style="--c:var(--{clase})"><a class="fcarta" href="{html.escape(a["enlace"])}" target="_blank" rel="noopener">'
+            f'{foto}<div><b>{col} {html.escape(a.get("carta", ""))}</b><span>{html.escape(a["titulo"][:60])}</span>'
+            f'<span>{datetime.fromtimestamp(a["ts"]):%d/%m %H:%M} {est}</span></div></a>'
+            f'<div class="tubo">'
+            + paso("compra", "Compras a", eur(fl["coste"]), f"pide {pide} + envío y protección")
+            + '<div class="fl">→</div>'
+            + paso("venta", "Vendes a", eur(fl["neto"]), venta_pie)
+            + '<div class="fl">→</div>'
+            + paso("profit " + ("pos" if fl["gan"] >= 0 else "neg"), "Profit", eur(fl["gan"], True),
+                   f'a la media: {eur(fl["gan_opt"], True)}')
+            + f'</div>{wp}</div>')
+    if not filas:
+        return '<div class="vacio">Aún no hay gangas con cifra.</div>'
+    total = (f'<div class="ff total"><div class="fcarta"><div><b>Total 🟢 + 🟡</b>'
+             f'<span>si las hubieras comprado todas y vendido en Cardmarket</span></div></div><div class="tubo">'
+             + paso("compra", "Compras", eur(tc), "pagado en Wallapop")
+             + '<div class="fl">→</div>' + paso("venta", "Vendes", eur(tv), "neto en Cardmarket")
+             + '<div class="fl">→</div>'
+             + paso("profit " + ("pos" if tg >= 0 else "neg"), "Profit", eur(tg, True), f"optimista: {eur(to, True)}")
+             + '</div></div>')
+    return total + "".join(filas)
+
+
 def depurar(hist):
     """Aplica a los avisos antiguos las reglas nuevas (10-nov noche): fuera lotes tomados por carta suelta,
     y precios de reclamo -> 🔴 con la ganancia calculada al tope."""
@@ -436,8 +534,10 @@ def generar():
     ph = real["por_hora"]
     kpis = "".join([
         k("🔔", "Avisos recibidos", len(hist), f"{hoy_n} hoy"),
-        k("💰", "Ganancia posible 🟢+🟡", eur(sum(a["ganancia"] for a in vy)), f"{len(vy)} verdes y amarillas"),
-        k("📈", "Posible (todas)", eur(sum(a["ganancia"] for a in gangas)), f"{len(gangas)} gangas, sin 🔴 ni lotes"),
+        k("💰", "Profit realista 🟢+🟡", eur(sum(flujo_de(a, seg.get(a["id"], {}))["gan"] for a in vy), True),
+          f"vendiendo al precio más bajo de Cardmarket · {len(vy)} gangas"),
+        k("📈", "Profit optimista 🟢+🟡", eur(sum(flujo_de(a, seg.get(a["id"], {}))["gan_opt"] for a in vy), True),
+          "vendiendo a la media de Cardmarket"),
         k("⏱️", "¿Cuánto duran?", f"{statistics.median(idas) / 60:.0f} min" if idas else "—",
           f"{rapidas} de {len(idas)} se fueron en &lt;1 h" if idas else "aún no ha desaparecido ninguna"),
         k("🏦", "Tu beneficio real", eur(real["beneficio"], True),
@@ -462,10 +562,17 @@ def generar():
 <div class="caja"><h3>Avisos por color</h3>{donut(cuenta)}</div></div>
 <div class="fila" style="margin-top:12px">
 <div class="caja"><h3>Últimas 24 h: anuncios nuevos por hora (puntos = avisos)</h3>{barras_horas(por_hora, hist)}</div>
-<div class="caja"><h3>Ganancia acumulada: posible frente a real</h3>{grafica(hist, real)}</div></div>
+<div class="caja"><h3>Ganancia acumulada: posible frente a real</h3>{grafica(hist, real, seg)}</div></div>
+<h2>Flujo: compras a tanto → vendes a tanto → profit</h2>
+<div class="flujo">{flujo_html(sorted(gangas, key=lambda a: -a["ts"]), seg, ahora)}</div>
 <h2>Avisos</h2><div class="filtros">{filtros}</div>
 <div class="lista">{tarjetas or '<div class="vacio">Todavía no ha llegado ningún aviso.</div>'}</div>
-<p class="nota">«Ganancia posible» es optimista: supone comprar a tiempo, carta auténtica y venta al precio prudente según
+<p class="nota">Flujo: «Compras a» = lo que pide el anuncio (el último precio visto) + envío y protección de Wallapop
+(aprox.). «Vendes a» = precio más bajo de esa carta hoy en Cardmarket, menos 5 % de comisión y el envío: es lo prudente,
+porque para vender rápido tienes que estar cerca del más barato. «A la media» = lo que calculaba el aviso. Las 🔴 y los
+lotes no salen en el flujo. Cifras de envío y comisión sin verificar hasta la primera compra real.<br>
+«Profit optimista» supone comprar a tiempo, carta auténtica y venta al precio prudente según
+idioma. supone comprar a tiempo, carta auténtica y venta al precio prudente según
 idioma. Las 🔴 muestran la ganancia si pagaras el tope. «Se fue» = ya no está en Wallapop (vendido o retirado),
 comprobado cada 3 min durante {DIAS_SEGUIR} días. Tu beneficio real sale de «APUNTES COMPRAS Y VENTAS.csv».</p>
 </main><script>{JS}</script></body></html>"""
