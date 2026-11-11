@@ -303,3 +303,28 @@
 2026-11-11 10:24:05 OK 104 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-11 10:27:06 OK 103 leídos, 4 nuevos, 4 evaluados, 0 avisos
 2026-11-11 10:30:05 OK 103 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 10:33:15 OK 103 leídos, 3 nuevos, 3 evaluados, 0 avisos
+2026-11-11 10:36:16 OK 102 leídos, 7 nuevos, 7 evaluados, 0 avisos
+2026-11-11 10:39:15 OK 101 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 10:42:17 OK 104 leídos, 12 nuevos, 12 evaluados, 0 avisos
+2026-11-11 10:45:16 OK 106 leídos, 7 nuevos, 7 evaluados, 0 avisos
+2026-11-11 10:48:15 OK 106 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 10:51:15 OK 106 leídos, 10 nuevos, 10 evaluados, 0 avisos
+2026-11-11 10:54:15 OK 106 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-11 10:57:16 OK 104 leídos, 16 nuevos, 16 evaluados, 0 avisos
+2026-11-11 11:00:09 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:00:18 OK 106 leídos, 9 nuevos, 8 evaluados, 0 avisos
+2026-11-11 11:03:07 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:03:15 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-11 11:06:07 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:06:16 OK 100 leídos, 20 nuevos, 19 evaluados, 0 avisos
+2026-11-11 11:09:07 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:09:15 OK 100 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-11 11:12:09 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:12:17 OK 101 leídos, 12 nuevos, 11 evaluados, 0 avisos
+2026-11-11 11:15:08 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:15:17 OK 99 leídos, 9 nuevos, 8 evaluados, 1 avisos
+2026-11-11 11:18:07 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:18:15 OK 99 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-11 11:21:08 ERROR evaluando x6qq5dk45e6y: TypeError: bad operand type for unary +: 'str'
+2026-11-11 11:21:16 OK 100 leídos, 9 nuevos, 8 evaluados, 0 avisos
