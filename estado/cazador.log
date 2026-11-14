@@ -1842,3 +1842,25 @@
 2026-11-14 14:16:29 OK 94 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-14 14:19:30 OK 96 leídos, 13 nuevos, 13 evaluados, 0 avisos
 2026-11-14 14:22:30 OK 100 leídos, 17 nuevos, 17 evaluados, 0 avisos
+2026-11-14 14:25:46 OK 100 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-14 14:28:42 OK 101 leídos, 9 nuevos, 9 evaluados, 0 avisos
+2026-11-14 14:31:44 OK 100 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-14 14:34:03 ERROR evaluando 36e538oodq6d: TypeError: bad operand type for unary +: 'str'
+2026-11-14 14:34:45 OK 97 leídos, 22 nuevos, 21 evaluados, 1 avisos
+2026-11-14 14:37:05 ERROR evaluando 36e538oodq6d: TypeError: bad operand type for unary +: 'str'
+2026-11-14 14:37:45 OK 99 leídos, 14 nuevos, 13 evaluados, 0 avisos
+2026-11-14 14:40:03 ERROR evaluando 36e538oodq6d: TypeError: bad operand type for unary +: 'str'
+2026-11-14 14:40:44 OK 98 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-14 14:43:03 ERROR evaluando 36e538oodq6d: TypeError: bad operand type for unary +: 'str'
+2026-11-14 14:43:44 OK 101 leídos, 16 nuevos, 15 evaluados, 0 avisos
+2026-11-14 14:46:03 ERROR evaluando 36e538oodq6d: TypeError: bad operand type for unary +: 'str'
+2026-11-14 14:46:43 OK 101 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-14 14:49:44 OK 103 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-14 14:52:44 OK 106 leídos, 18 nuevos, 18 evaluados, 0 avisos
+2026-11-14 14:55:43 OK 106 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-14 14:58:44 OK 105 leídos, 15 nuevos, 15 evaluados, 1 avisos
+2026-11-14 15:01:44 OK 105 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-14 15:04:45 OK 104 leídos, 30 nuevos, 30 evaluados, 0 avisos
+2026-11-14 15:07:45 OK 102 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-14 15:10:44 OK 102 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-14 15:13:43 OK 100 leídos, 14 nuevos, 14 evaluados, 0 avisos
