@@ -2091,3 +2091,20 @@
 2026-11-15 02:13:51 OK 100 leídos, 2 nuevos, 2 evaluados, 0 avisos
 2026-11-15 02:16:50 OK 100 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-15 02:19:50 OK 100 leídos, 2 nuevos, 2 evaluados, 0 avisos
+2026-11-15 02:23:10 OK 98 leídos, 2 nuevos, 2 evaluados, 0 avisos
+2026-11-15 02:26:14 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:29:13 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:32:10 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:35:09 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:38:09 OK 98 leídos, 1 nuevos, 1 evaluados, 0 avisos
+2026-11-15 02:41:09 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:44:10 OK 98 leídos, 3 nuevos, 3 evaluados, 0 avisos
+2026-11-15 02:47:10 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:50:10 OK 98 leídos, 3 nuevos, 3 evaluados, 0 avisos
+2026-11-15 02:53:09 OK 97 leídos, 3 nuevos, 3 evaluados, 0 avisos
+2026-11-15 02:56:09 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 02:59:10 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 03:02:09 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 03:05:09 OK 97 leídos, 1 nuevos, 1 evaluados, 0 avisos
+2026-11-15 03:08:33 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-15 03:10:20 ERROR leyendo datos (1 seguidos): HTTPError: HTTP Error 500: Internal Server Error
