@@ -1,28 +1,3 @@
-2026-11-14 00:24:50 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 00:27:50 OK 98 leídos, 1 nuevos, 1 evaluados, 0 avisos
-2026-11-14 00:30:51 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 00:33:51 OK 96 leídos, 8 nuevos, 8 evaluados, 0 avisos
-2026-11-14 00:36:50 OK 98 leídos, 4 nuevos, 4 evaluados, 0 avisos
-2026-11-14 00:39:51 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 00:42:50 OK 96 leídos, 4 nuevos, 4 evaluados, 0 avisos
-2026-11-14 00:46:00 OK 96 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 00:48:59 OK 94 leídos, 6 nuevos, 6 evaluados, 0 avisos
-2026-11-14 00:51:59 OK 93 leídos, 5 nuevos, 5 evaluados, 0 avisos
-2026-11-14 00:54:59 OK 93 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 00:58:00 OK 93 leídos, 10 nuevos, 10 evaluados, 0 avisos
-2026-11-14 01:01:00 OK 93 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 01:03:58 OK 90 leídos, 5 nuevos, 5 evaluados, 0 avisos
-2026-11-14 01:07:00 OK 93 leídos, 8 nuevos, 8 evaluados, 0 avisos
-2026-11-14 01:10:00 OK 92 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 01:12:59 OK 92 leídos, 7 nuevos, 7 evaluados, 0 avisos
-2026-11-14 01:16:00 OK 92 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 01:18:59 OK 91 leídos, 3 nuevos, 3 evaluados, 0 avisos
-2026-11-14 01:22:02 OK 91 leídos, 3 nuevos, 3 evaluados, 0 avisos
-2026-11-14 01:25:00 OK 91 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 01:28:00 OK 92 leídos, 3 nuevos, 3 evaluados, 0 avisos
-2026-11-14 01:30:59 OK 92 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-14 01:33:59 OK 92 leídos, 5 nuevos, 5 evaluados, 0 avisos
-2026-11-14 01:37:21 OK 94 leídos, 4 nuevos, 4 evaluados, 0 avisos
 2026-11-14 01:40:17 OK 94 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-14 01:43:18 OK 92 leídos, 2 nuevos, 2 evaluados, 0 avisos
 2026-11-14 01:46:18 OK 92 leídos, 0 nuevos, 0 evaluados, 0 avisos
@@ -2998,3 +2973,28 @@
 2026-11-20 00:04:49 OK 95 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-20 00:07:53 OK 94 leídos, 9 nuevos, 9 evaluados, 0 avisos
 2026-11-20 00:10:50 OK 101 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-20 00:13:55 OK 101 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-20 00:16:52 OK 97 leídos, 17 nuevos, 17 evaluados, 0 avisos
+2026-11-20 00:19:53 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-20 00:22:53 OK 99 leídos, 10 nuevos, 10 evaluados, 0 avisos
+2026-11-20 00:25:53 OK 97 leídos, 14 nuevos, 14 evaluados, 0 avisos
+2026-11-20 00:28:53 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-20 00:31:55 OK 95 leídos, 10 nuevos, 10 evaluados, 2 avisos
+2026-11-20 00:34:53 OK 95 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-20 00:37:54 OK 95 leídos, 4 nuevos, 4 evaluados, 0 avisos
+2026-11-20 00:40:55 OK 95 leídos, 11 nuevos, 11 evaluados, 0 avisos
+2026-11-20 00:43:53 OK 95 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-20 00:46:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
+2026-11-20 00:46:55 OK 94 leídos, 10 nuevos, 9 evaluados, 0 avisos
+2026-11-20 00:49:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
+2026-11-20 00:49:54 OK 94 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-20 00:52:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
+2026-11-20 00:52:54 OK 95 leídos, 12 nuevos, 11 evaluados, 0 avisos
+2026-11-20 00:55:02 ERROR evaluando nz08n1rkq36o: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-20 00:55:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
+2026-11-20 00:55:03 ERROR evaluando 0j280onxvvjy: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-20 00:55:55 OK 95 leídos, 6 nuevos, 3 evaluados, 0 avisos
+2026-11-20 00:58:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
+2026-11-20 00:58:55 OK 95 leídos, 3 nuevos, 2 evaluados, 0 avisos
+2026-11-20 01:01:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
+2026-11-20 01:01:53 OK 93 leídos, 4 nuevos, 3 evaluados, 0 avisos
