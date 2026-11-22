@@ -1,31 +1,3 @@
-2026-11-16 19:53:38 OK 108 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-16 19:55:38 ERROR evaluando qzmmqp2r9xzv: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 19:55:39 ERROR evaluando 8j387r3n31z9: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 19:55:40 ERROR evaluando e65qx94nom6o: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 19:55:40 ERROR evaluando 8z88o2ydloz3: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 19:55:43 ERROR evaluando 0j280qmx8rjy: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 19:56:43 OK 106 leídos, 26 nuevos, 21 evaluados, 0 avisos
-2026-11-16 19:59:45 OK 108 leídos, 37 nuevos, 37 evaluados, 2 avisos
-2026-11-16 20:02:39 OK 107 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-16 20:05:43 OK 111 leídos, 23 nuevos, 23 evaluados, 1 avisos
-2026-11-16 20:08:40 OK 111 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-16 20:11:41 OK 109 leídos, 18 nuevos, 18 evaluados, 2 avisos
-2026-11-16 20:14:58 OK 105 leídos, 22 nuevos, 22 evaluados, 0 avisos
-2026-11-16 20:17:56 OK 105 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-16 20:20:57 OK 102 leídos, 18 nuevos, 18 evaluados, 0 avisos
-2026-11-16 20:23:56 OK 100 leídos, 22 nuevos, 22 evaluados, 0 avisos
-2026-11-16 20:26:57 OK 100 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-16 20:29:58 OK 99 leídos, 23 nuevos, 23 evaluados, 0 avisos
-2026-11-16 20:32:56 OK 99 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-16 20:34:51 ERROR evaluando mzn3re4y0kjn: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 20:35:56 OK 96 leídos, 15 nuevos, 14 evaluados, 0 avisos
-2026-11-16 20:38:56 OK 96 leídos, 1 nuevos, 1 evaluados, 0 avisos
-2026-11-16 20:41:58 OK 97 leídos, 11 nuevos, 11 evaluados, 0 avisos
-2026-11-16 20:43:51 ERROR evaluando 8j3872mx41z9: HTTPError: HTTP Error 503: Service Unavailable
-2026-11-16 20:45:03 OK 97 leídos, 6 nuevos, 5 evaluados, 0 avisos
-2026-11-16 20:47:57 OK 97 leídos, 1 nuevos, 1 evaluados, 0 avisos
-2026-11-16 20:50:59 OK 94 leídos, 12 nuevos, 12 evaluados, 0 avisos
-2026-11-16 20:53:57 OK 94 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-16 20:56:57 OK 95 leídos, 25 nuevos, 25 evaluados, 0 avisos
 2026-11-16 20:59:57 OK 96 leídos, 11 nuevos, 11 evaluados, 0 avisos
 2026-11-16 21:02:56 OK 96 leídos, 0 nuevos, 0 evaluados, 0 avisos
@@ -2998,3 +2970,31 @@
 2026-11-22 12:42:01 OK 96 leídos, 18 nuevos, 18 evaluados, 0 avisos
 2026-11-22 12:45:00 OK 95 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-22 12:48:03 OK 102 leídos, 19 nuevos, 19 evaluados, 2 avisos
+2026-11-22 12:51:07 OK 101 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-22 12:54:08 OK 101 leídos, 19 nuevos, 19 evaluados, 1 avisos
+2026-11-22 12:57:09 OK 105 leídos, 18 nuevos, 18 evaluados, 0 avisos
+2026-11-22 13:00:08 OK 105 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-22 13:03:10 OK 101 leídos, 13 nuevos, 13 evaluados, 0 avisos
+2026-11-22 13:06:08 OK 101 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-22 13:08:13 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:09:10 OK 102 leídos, 19 nuevos, 18 evaluados, 1 avisos
+2026-11-22 13:11:13 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:12:10 OK 102 leídos, 14 nuevos, 13 evaluados, 0 avisos
+2026-11-22 13:14:12 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:15:09 OK 102 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-22 13:17:13 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:18:09 OK 105 leídos, 10 nuevos, 9 evaluados, 0 avisos
+2026-11-22 13:20:12 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:21:08 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-22 13:23:13 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:24:09 OK 101 leídos, 8 nuevos, 7 evaluados, 0 avisos
+2026-11-22 13:26:12 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:27:07 OK 99 leídos, 9 nuevos, 8 evaluados, 0 avisos
+2026-11-22 13:29:12 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:30:09 OK 99 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-22 13:32:13 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:33:09 OK 99 leídos, 5 nuevos, 4 evaluados, 0 avisos
+2026-11-22 13:35:12 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:36:07 OK 99 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-22 13:38:13 ERROR evaluando 4z48w49k0vjy: TypeError: bad operand type for unary +: 'str'
+2026-11-22 13:39:08 OK 101 leídos, 9 nuevos, 8 evaluados, 0 avisos
