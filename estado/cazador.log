@@ -1,37 +1,3 @@
-2026-11-20 04:21:00 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:23:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:24:00 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:26:03 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:27:00 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:29:15 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:30:09 OK 106 leídos, 2 nuevos, 1 evaluados, 0 avisos
-2026-11-20 04:32:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:33:08 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:35:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:36:07 OK 106 leídos, 2 nuevos, 1 evaluados, 0 avisos
-2026-11-20 04:38:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:39:06 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:41:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:42:07 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:44:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:45:07 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:47:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:48:06 OK 106 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:50:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:51:07 OK 105 leídos, 2 nuevos, 1 evaluados, 0 avisos
-2026-11-20 04:53:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:54:07 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:56:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 04:57:07 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 04:59:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 05:00:07 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 05:02:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 05:03:07 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 05:05:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 05:06:06 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 05:08:15 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
-2026-11-20 05:09:07 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-20 05:11:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
 2026-11-20 05:12:07 OK 105 leídos, 5 nuevos, 4 evaluados, 0 avisos
 2026-11-20 05:14:14 ERROR evaluando pzpklxdeklj3: TypeError: bad operand type for unary +: 'str'
 2026-11-20 05:15:07 OK 105 leídos, 7 nuevos, 6 evaluados, 0 avisos
@@ -2998,3 +2964,37 @@
 2026-11-26 00:24:34 OK 105 leídos, 4 nuevos, 3 evaluados, 0 avisos
 2026-11-26 00:26:31 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
 2026-11-26 00:27:35 OK 108 leídos, 10 nuevos, 9 evaluados, 0 avisos
+2026-11-26 00:29:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:30:49 OK 108 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 00:32:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:33:48 OK 109 leídos, 7 nuevos, 6 evaluados, 0 avisos
+2026-11-26 00:35:45 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:36:47 OK 109 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 00:38:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:39:48 OK 110 leídos, 3 nuevos, 2 evaluados, 0 avisos
+2026-11-26 00:41:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:42:48 OK 110 leídos, 5 nuevos, 4 evaluados, 0 avisos
+2026-11-26 00:44:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:45:47 OK 110 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 00:47:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:48:47 OK 110 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 00:50:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:51:47 OK 110 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 00:53:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:54:47 OK 109 leídos, 2 nuevos, 1 evaluados, 0 avisos
+2026-11-26 00:56:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 00:57:47 OK 109 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 00:59:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:00:47 OK 109 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 01:02:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:03:47 OK 109 leídos, 2 nuevos, 1 evaluados, 0 avisos
+2026-11-26 01:05:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:06:48 OK 109 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 01:08:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:09:47 OK 109 leídos, 2 nuevos, 1 evaluados, 0 avisos
+2026-11-26 01:11:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:12:47 OK 109 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-26 01:14:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:15:47 OK 109 leídos, 2 nuevos, 1 evaluados, 0 avisos
+2026-11-26 01:17:46 ERROR evaluando 0j280vlwymjy: TypeError: bad operand type for unary +: 'str'
+2026-11-26 01:18:48 OK 108 leídos, 3 nuevos, 2 evaluados, 0 avisos
