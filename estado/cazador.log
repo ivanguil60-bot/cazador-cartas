@@ -1,20 +1,3 @@
-2026-11-21 19:23:06 OK 109 leídos, 20 nuevos, 19 evaluados, 1 avisos
-2026-11-21 19:24:59 ERROR evaluando x6qq58l89q6y: TypeError: bad operand type for unary +: 'str'
-2026-11-21 19:26:00 OK 109 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-21 19:28:02 ERROR evaluando x6qq58l89q6y: TypeError: bad operand type for unary +: 'str'
-2026-11-21 19:29:02 OK 114 leídos, 17 nuevos, 16 evaluados, 0 avisos
-2026-11-21 19:31:02 ERROR evaluando x6qq58l89q6y: TypeError: bad operand type for unary +: 'str'
-2026-11-21 19:32:03 OK 113 leídos, 14 nuevos, 13 evaluados, 0 avisos
-2026-11-21 19:33:59 ERROR evaluando x6qq58l89q6y: TypeError: bad operand type for unary +: 'str'
-2026-11-21 19:35:00 OK 113 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-21 19:38:02 OK 114 leídos, 10 nuevos, 10 evaluados, 0 avisos
-2026-11-21 19:40:59 OK 114 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-21 19:44:00 OK 114 leídos, 9 nuevos, 9 evaluados, 0 avisos
-2026-11-21 19:47:09 OK 114 leídos, 10 nuevos, 10 evaluados, 0 avisos
-2026-11-21 19:50:07 OK 114 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-21 19:53:08 OK 112 leídos, 17 nuevos, 17 evaluados, 0 avisos
-2026-11-21 19:56:08 OK 112 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-21 19:59:08 OK 113 leídos, 14 nuevos, 14 evaluados, 0 avisos
 2026-11-21 20:02:11 OK 113 leídos, 19 nuevos, 19 evaluados, 0 avisos
 2026-11-21 20:05:08 OK 111 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-21 20:08:10 OK 112 leídos, 19 nuevos, 19 evaluados, 0 avisos
@@ -2998,3 +2981,20 @@
 2026-11-27 17:19:32 OK 98 leídos, 0 nuevos, 0 evaluados, 0 avisos
 2026-11-27 17:22:33 OK 102 leídos, 11 nuevos, 11 evaluados, 0 avisos
 2026-11-27 17:25:32 OK 102 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 17:28:55 OK 99 leídos, 13 nuevos, 13 evaluados, 1 avisos
+2026-11-27 17:31:56 OK 96 leídos, 8 nuevos, 8 evaluados, 0 avisos
+2026-11-27 17:34:53 OK 96 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 17:37:53 OK 96 leídos, 4 nuevos, 4 evaluados, 0 avisos
+2026-11-27 17:40:53 OK 96 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 17:43:59 OK 97 leídos, 6 nuevos, 6 evaluados, 0 avisos
+2026-11-27 17:46:56 OK 96 leídos, 9 nuevos, 9 evaluados, 0 avisos
+2026-11-27 17:49:51 OK 96 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 17:52:50 OK 95 leídos, 5 nuevos, 5 evaluados, 0 avisos
+2026-11-27 17:55:57 OK 94 leídos, 6 nuevos, 6 evaluados, 0 avisos
+2026-11-27 17:58:53 OK 93 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 18:01:52 OK 92 leídos, 14 nuevos, 14 evaluados, 0 avisos
+2026-11-27 18:04:51 OK 92 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 18:07:52 OK 93 leídos, 14 nuevos, 14 evaluados, 0 avisos
+2026-11-27 18:10:56 OK 99 leídos, 15 nuevos, 15 evaluados, 0 avisos
+2026-11-27 18:13:53 OK 99 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-27 18:16:57 OK 98 leídos, 7 nuevos, 7 evaluados, 0 avisos
