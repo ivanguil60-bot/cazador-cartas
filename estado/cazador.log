@@ -1,39 +1,3 @@
-2026-11-22 21:01:57 OK 92 leídos, 11 nuevos, 11 evaluados, 0 avisos
-2026-11-22 21:04:57 OK 92 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:07:57 OK 94 leídos, 16 nuevos, 16 evaluados, 0 avisos
-2026-11-22 21:10:57 OK 94 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:13:56 OK 95 leídos, 5 nuevos, 5 evaluados, 0 avisos
-2026-11-22 21:16:58 OK 100 leídos, 12 nuevos, 12 evaluados, 0 avisos
-2026-11-22 21:19:56 OK 100 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:23:15 OK 108 leídos, 21 nuevos, 21 evaluados, 1 avisos
-2026-11-22 21:26:14 OK 108 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:29:14 OK 108 leídos, 10 nuevos, 10 evaluados, 0 avisos
-2026-11-22 21:32:15 OK 107 leídos, 6 nuevos, 6 evaluados, 0 avisos
-2026-11-22 21:35:13 OK 107 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:38:14 OK 108 leídos, 12 nuevos, 12 evaluados, 0 avisos
-2026-11-22 21:41:14 OK 108 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:44:16 OK 106 leídos, 11 nuevos, 11 evaluados, 1 avisos
-2026-11-22 21:47:14 OK 105 leídos, 7 nuevos, 7 evaluados, 0 avisos
-2026-11-22 21:50:15 OK 105 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:53:16 OK 106 leídos, 12 nuevos, 12 evaluados, 0 avisos
-2026-11-22 21:56:13 OK 105 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 21:59:15 OK 105 leídos, 17 nuevos, 17 evaluados, 0 avisos
-2026-11-22 22:02:16 OK 104 leídos, 10 nuevos, 10 evaluados, 0 avisos
-2026-11-22 22:05:14 OK 104 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 22:08:14 OK 97 leídos, 16 nuevos, 16 evaluados, 0 avisos
-2026-11-22 22:11:14 OK 97 leídos, 0 nuevos, 0 evaluados, 0 avisos
-2026-11-22 22:14:25 OK 97 leídos, 7 nuevos, 7 evaluados, 0 avisos
-2026-11-22 22:16:25 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
-2026-11-22 22:17:24 OK 96 leídos, 7 nuevos, 6 evaluados, 0 avisos
-2026-11-22 22:19:25 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
-2026-11-22 22:20:25 OK 96 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-22 22:22:31 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
-2026-11-22 22:23:30 OK 95 leídos, 12 nuevos, 11 evaluados, 0 avisos
-2026-11-22 22:25:27 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
-2026-11-22 22:26:26 OK 93 leídos, 11 nuevos, 10 evaluados, 0 avisos
-2026-11-22 22:28:25 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
-2026-11-22 22:29:24 OK 93 leídos, 1 nuevos, 0 evaluados, 0 avisos
-2026-11-22 22:31:26 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
 2026-11-22 22:32:26 OK 93 leídos, 13 nuevos, 12 evaluados, 1 avisos
 2026-11-22 22:34:25 ERROR evaluando e65qxkpkyk6o: TypeError: bad operand type for unary +: 'str'
 2026-11-22 22:35:25 OK 93 leídos, 1 nuevos, 0 evaluados, 0 avisos
@@ -2998,3 +2962,39 @@
 2026-11-28 19:50:02 OK 103 leídos, 1 nuevos, 0 evaluados, 0 avisos
 2026-11-28 19:51:58 ERROR evaluando wzvgwwgpvqzl: TypeError: bad operand type for unary +: 'str'
 2026-11-28 19:53:04 OK 105 leídos, 13 nuevos, 12 evaluados, 1 avisos
+2026-11-28 19:55:08 ERROR evaluando wzvgwwgpvqzl: TypeError: bad operand type for unary +: 'str'
+2026-11-28 19:56:15 OK 105 leídos, 1 nuevos, 0 evaluados, 0 avisos
+2026-11-28 19:59:21 OK 106 leídos, 10 nuevos, 10 evaluados, 0 avisos
+2026-11-28 20:02:17 OK 105 leídos, 12 nuevos, 12 evaluados, 0 avisos
+2026-11-28 20:05:15 OK 104 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-28 20:07:09 ERROR evaluando x6qq55v2we6y: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:07:09 ERROR evaluando ejkmggpweyzx: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:07:09 ERROR evaluando 4z48ww03ovjy: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:07:10 ERROR evaluando pzpklld759j3: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:07:10 ERROR evaluando 0j2800ne3rjy: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:07:10 ERROR evaluando xzogyyxd22j9: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:08:17 OK 105 leídos, 20 nuevos, 14 evaluados, 0 avisos
+2026-11-28 20:10:08 ERROR evaluando qjwrxx2n3q6o: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:08 ERROR evaluando 8z88oo5l0oz3: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:08 ERROR evaluando 8z88oo5l9dz3: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:08 ERROR evaluando x6qq55v2we6y: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:09 ERROR evaluando ejkmggpweyzx: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:09 ERROR evaluando 4z48ww03ovjy: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:10 ERROR evaluando pzpklld759j3: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:10 ERROR evaluando 0j2800ne3rjy: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:10:10 ERROR evaluando xzogyyxd22j9: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:11:17 OK 103 leídos, 23 nuevos, 14 evaluados, 0 avisos
+2026-11-28 20:14:19 OK 103 leídos, 9 nuevos, 9 evaluados, 0 avisos
+2026-11-28 20:17:14 OK 104 leídos, 18 nuevos, 18 evaluados, 0 avisos
+2026-11-28 20:20:14 OK 104 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-28 20:22:08 ERROR evaluando v6gpddo9d56e: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:22:08 ERROR evaluando qzmmqq7llozv: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:22:08 ERROR evaluando 36e5338lxq6d: HTTPError: HTTP Error 503: Service Unavailable
+2026-11-28 20:23:16 OK 106 leídos, 14 nuevos, 11 evaluados, 0 avisos
+2026-11-28 20:26:23 OK 108 leídos, 18 nuevos, 18 evaluados, 0 avisos
+2026-11-28 20:29:14 OK 108 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-28 20:32:16 OK 108 leídos, 10 nuevos, 10 evaluados, 0 avisos
+2026-11-28 20:35:15 OK 108 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-28 20:38:15 OK 110 leídos, 8 nuevos, 8 evaluados, 0 avisos
+2026-11-28 20:41:15 OK 110 leídos, 0 nuevos, 0 evaluados, 0 avisos
+2026-11-28 20:44:18 OK 110 leídos, 10 nuevos, 10 evaluados, 0 avisos
